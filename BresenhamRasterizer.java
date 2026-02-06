@@ -9,6 +9,13 @@ class BresenhamRasterizer implements LineRasterizer {
 
     ArrayList<Point> points = new ArrayList<>();
 
+    int dx = Math.abs(x2 - x1);
+    int dy = Math.abs(y2 - y1);
+
+    int sx = (x1 < x2) ? 1 : -1;
+    int sy = (y1 < y2) ? 1 : -1;
+
+   
     points.add(new Point(x1, y1));
     points.add(new Point(x2, y2));
 
