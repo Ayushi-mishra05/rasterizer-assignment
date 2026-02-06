@@ -3,44 +3,40 @@ import java.util.ArrayList;
 class BresenhamRasterizer implements LineRasterizer {
     public Point[] rasterize(Point p1, Point p2) {
 
-    int x1 = p1.x;
-    int y1 = p1.y;
-    int x2 = p2.x;
-    int y2 = p2.y;
+        int x1 = p1.x;
+        int y1 = p1.y;
+        int x2 = p2.x;
+        int y2 = p2.y;
 
-    ArrayList<Point> points = new ArrayList<>();
+        ArrayList<Point> points = new ArrayList<>();
 
-    int dx = Math.abs(x2 - x1);
-    int dy = Math.abs(y2 - y1);
+        int dx = Math.abs(x2 - x1);
+        int dy = Math.abs(y2 - y1);
 
-    int sx = (x1 < x2) ? 1 : -1;
-    int sy = (y1 < y2) ? 1 : -1;
+        int sx = (x1 < x2) ? 1 : -1;
+        int sy = (y1 < y2) ? 1 : -1;
 
-    int err = dx - dy;
+        int err = dx - dy;
 
-    while (true) {
-        points.add(new Point(x1, y1));
+        while (true) {
+            points.add(new Point(x1, y1));
 
-        if (x1 == x2 && y1 == y2)
-            break;
+            if (x1 == x2 && y1 == y2)
+                break;
 
-        int e2 = 2 * err;
+            int e2 = 2 * err;
 
-        if (e2 > -dy) {
-            err -= dy;
-            x1 += sx;
+            if (e2 > -dy) {
+                err -= dy;
+                x1 += sx;
+            }
+
+            if (e2 < dx) {
+                err += dx;
+                y1 += sy;
+            }
         }
 
-        if (e2 < dx) {
-            err += dx;
-            y1 += sy;
-        }
+        return points.toArray(new Point[0]);
     }
-
-    return points.toArray(new Point[0]);
 }
-
-       
-    }
-
-
